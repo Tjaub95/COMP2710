@@ -573,6 +573,14 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 					i = 3;
 				}
 			}
+			else if (friendListTemp.length() == 0)
+			{
+				if (messageBuffer.find(")%") == std::string::npos)
+				{
+					messageBuffer = "";
+					i = 3;
+				}
+			}
 			else
 			{
 
@@ -593,8 +601,8 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 						if (user_temp == user2)
 						{
 							first_char = messageBuffer.find("%(");
-							message_temp = messageBuffer.substr(0, first_char - 2);
-							message_buffer_temp2 = messageBuffer.substr(message_temp.length());
+							message_temp = messageBuffer.substr(0, first_char);
+							message_buffer_temp2 = messageBuffer.substr(message_temp.length() + 2);
 
 							home_buffer += user_temp + " >>\n" + message_temp + "\n";
 
@@ -655,12 +663,19 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 				if(user_temp == current_user)
 				{
 					message_temp = messageBuffer.substr(0, messageBuffer.find("%("));
-					messageBuffer = messageBuffer.substr(message_temp.length());
+					messageBuffer = messageBuffer.substr(message_temp.length() - 2);
 					messageBuffer = messageBuffer.substr(messageBuffer.find("\n") + 1);
 					message_buffer_temp2 = messageBuffer;
 					home_buffer += user_temp + " >>\n" + message_temp + "\n";
 				}
 
+				else if (friendListTemp.length() == 0)
+				{
+					if (messageBuffer.find(")%") == std::string::npos)
+					{
+						messageBuffer = "";
+					}
+				}
 				//If it is not the current user then that user and message is removed from the message buffer.
 				else
 				{
@@ -685,7 +700,7 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 							if(user_temp == user2)
 							{
 								first_char = messageBuffer.find("%(");
-								message_temp = messageBuffer.substr(0, first_char - 2);
+								message_temp = messageBuffer.substr(0, first_char);
 
 								//If messageBuffer is emptied then i set to 3 to end the while loop.
 								if(messageBuffer.length() == 0)
