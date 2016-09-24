@@ -55,34 +55,6 @@ public:
 	void makeHPage(string, string, string, string);
 };
 
-//Class: FriendList
-//Description: Contains each user's friend's list.
-
-class FriendList
-{
-public:
-	void findFriend();
-};
-
-//Class: HashtagList
-//Description: Contains each user's followed hashatag list.
-
-class HashtagList
-{
-public:
-	void findHashtag();
-};
-
-//Class: User
-//Description: Contains information from the current user,
-//             they're friend's list, and followed hashtag topics.
-
-class User
-{
-public:
-	void currUser(string, string, string, string);
-};
-
 //Class: WallPage
 //Description: Displays the wall page of the current user.
 
@@ -229,11 +201,43 @@ void Menu::userWelcome(string name, bool swapUser)
 
 void Menu::registerFunction()
 {
+    int i = 0;
+    string welcome, user_buffer = user, tempUser;
+    size_t first_char;
+    
 	cout << "Please enter user name: ";
 	cin >> currentUser;
-
-	user += "%(" + currentUser + ")%";
-	userWelcome(currentUser, false);
+    cout << endl;
+    
+    //while loop that checks the size of the user_buffer.
+    while(user_buffer.size() > 0)
+    {
+        first_char = user_buffer.find("%(");
+        user_buffer = user_buffer.substr(first_char + 2);
+        tempUser = user_buffer.substr(0, user_buffer.find(")%"));
+        
+        //checks to see if the user being added is already a user.
+        if(currentUser != tempUser)
+        {
+            user_buffer = user_buffer.substr(user_buffer.find(")%") + 2);
+        }
+        
+        else
+        {
+            user_buffer = "";
+            i = 1;
+        }
+    }
+    
+    if ( i != 1)
+    {
+        user += "%(" + currentUser + ")%";
+        userWelcome(currentUser, false);
+    }
+    else
+    {
+        cout << "That user name is already taken." << endl;
+    }
 }
 
 void Menu::messageFunction(string name)
@@ -553,11 +557,20 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 
 			if (user_temp == current_user)
 			{
-				message_temp = messageBuffer.substr(0, messageBuffer.find("%("));
-				messageBuffer = messageBuffer.substr(message_temp.length() - 2);
-				messageBuffer = messageBuffer.substr(messageBuffer.find("\n") + 1);
-				message_buffer_temp2 = messageBuffer;
-
+                if (messageBuffer.find("%(") != std::string::npos)
+                {
+                    message_temp = messageBuffer.substr(0, messageBuffer.find("%("));
+                    messageBuffer = messageBuffer.substr(message_temp.length());
+                    messageBuffer = messageBuffer.substr(messageBuffer.find("%("));
+                    message_buffer_temp2 = messageBuffer;
+                }
+                else
+                {
+                    message_temp = messageBuffer;
+                    messageBuffer = messageBuffer.substr(message_temp.length());
+                    message_buffer_temp2 = messageBuffer;
+                }
+				
 				home_buffer += user_temp + " >>\n" + message_temp + "\n";
 
 				i++;
@@ -600,9 +613,9 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 
 						if (user_temp == user2)
 						{
-							first_char = messageBuffer.find("%(");
+                            first_char = messageBuffer.find("%(");
 							message_temp = messageBuffer.substr(0, first_char);
-							message_buffer_temp2 = messageBuffer.substr(message_temp.length() + 2);
+							message_buffer_temp2 = messageBuffer.substr(message_temp.length());
 
 							home_buffer += user_temp + " >>\n" + message_temp + "\n";
 
@@ -662,10 +675,20 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 				//If it is the current user then the user and message are printed and i is incremented.
 				if(user_temp == current_user)
 				{
-					message_temp = messageBuffer.substr(0, messageBuffer.find("%("));
-					messageBuffer = messageBuffer.substr(message_temp.length() - 2);
-					messageBuffer = messageBuffer.substr(messageBuffer.find("\n") + 1);
-					message_buffer_temp2 = messageBuffer;
+                    if (messageBuffer.find("%(") != std::string::npos)
+                    {
+                        message_temp = messageBuffer.substr(0, messageBuffer.find("%("));
+                        messageBuffer = messageBuffer.substr(message_temp.length());
+                        messageBuffer = messageBuffer.substr(messageBuffer.find("%("));
+                        message_buffer_temp2 = messageBuffer;
+                    }
+                    else
+                    {
+                        message_temp = messageBuffer;
+                        messageBuffer = messageBuffer.substr(message_temp.length());
+                        message_buffer_temp2 = messageBuffer;
+                    }
+                    
 					home_buffer += user_temp + " >>\n" + message_temp + "\n";
 				}
 
@@ -716,7 +739,14 @@ void HomePage::makeHPage(string user, string friends, string messages, string ha
 					}
 				}
 
-				messageBuffer = messageBuffer.substr(messageBuffer.find("\n") + 1);
+                if (messageBuffer.find("%(") != std::string::npos)
+                {
+                    messageBuffer = messageBuffer.substr(messageBuffer.find("%("));
+                }
+                else
+                {
+                    messageBuffer = "";
+                }
 
 				//resets the friendListTemp to the friendList after the while loop.
 				friendListTemp = friends;
