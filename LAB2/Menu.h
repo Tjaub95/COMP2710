@@ -11,6 +11,7 @@
 #include <string>
 #include "Friends.h"
 #include "Messages.h"
+#include "Hashtags.h"
 
 using namespace std;
 

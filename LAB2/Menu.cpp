@@ -118,6 +118,7 @@ void Menu::program()
 void Menu::switchOption(char option)
 {
 	Messages msg;
+	Hashtags newHashtag;
 	Friends newFriend;
 	int i;
 	char selection = option;
@@ -144,6 +145,7 @@ void Menu::switchOption(char option)
 			break;
 
 		case 't':
+			newHashtag.addHashtag(name);
 			break;
 
 		case 'w':
