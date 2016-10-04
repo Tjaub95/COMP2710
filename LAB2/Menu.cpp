@@ -117,6 +117,8 @@ void Menu::program()
 
 void Menu::switchOption(char option)
 {
+	Messages msg;
+	Friends newFriend;
 	int i;
 	char selection = option;
 
@@ -134,9 +136,11 @@ void Menu::switchOption(char option)
 	switch (selection)
 	{
 		case 'f':
+			newFriend.addFriend(name);
 			break;
 
 		case 'p':
+			msg.message(name);
 			break;
 
 		case 't':

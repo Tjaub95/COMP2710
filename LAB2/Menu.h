@@ -9,6 +9,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Friends.h"
+#include "Messages.h"
 
 using namespace std;
 
