@@ -23,7 +23,7 @@ class Pages
 {
 public:
 	int time, i;
-	string hashtags, message, msg_bug, friendmsgs;
+	string hashtags, message, msg_buf, friendmsgs;
 
 	void msgs(string, int);
 	void homepage(string);

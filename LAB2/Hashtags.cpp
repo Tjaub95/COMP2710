@@ -40,7 +40,7 @@ void Hashtags::addHashtag(string name)
 			if (hashtagName == newHashtag)
 			{
 				found = false;
-				cerr << "Users are already friends." << endl;
+				cerr << "Users already follows this hashtag." << endl;
 			}
 		}
 		infile.close();
