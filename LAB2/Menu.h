@@ -12,6 +12,7 @@
 #include "Friends.h"
 #include "Messages.h"
 #include "Hashtags.h"
+#include "Pages.h"
 
 using namespace std;
 

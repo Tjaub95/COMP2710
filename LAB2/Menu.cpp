@@ -119,6 +119,7 @@ void Menu::switchOption(char option)
 {
 	Messages msg;
 	Hashtags newHashtag;
+	Pages pg;
 	Friends newFriend;
 	int i;
 	char selection = option;
@@ -149,9 +150,11 @@ void Menu::switchOption(char option)
 			break;
 
 		case 'w':
+			pg.msgs(name, i);
 			break;
 
 		case 'h':
+			pg.msgs(name, i);
 			break;
 
 		case 'q':
