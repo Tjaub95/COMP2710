@@ -784,7 +784,6 @@ string Pages::checkfriendmsg()
 			break;
 		}
 	}
-	cout << check << endl;
 
 	return check;
 }
