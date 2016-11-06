@@ -10,6 +10,8 @@
 //               they reach the end of the game.
 
 #include "Menu.h"
+string start;
+string destination;
 
 //Function:    userIn
 //Description: Prompts the user for the direction they would like to go.
@@ -23,7 +25,10 @@ void Menu::userIn()
     //Continues to prompt user for input until a valid file name is entered
     while(!goodIn)
     {
-        fileIn = "config";
+		cout << "Please enter file name: ";
+		cin >> fileIn;
+		cout << endl;
+
         //Opens the file
         infile.open(fileIn.c_str());
         if (infile.is_open())
@@ -55,6 +60,11 @@ void Menu::readFile(string file)
 
     //opens file for reading
     infile.open(filenameIn.c_str());
+
+	string dummyString;
+	infile >> dummyString;
+	infile >> start;
+	infile >> destination;
 
     //creates 49 node objects
     for(int i = 0; i < 49; i++)
@@ -925,7 +935,7 @@ void Menu::switchNodeNumberSL(string lett, char num)
     }
 }
 
-//Function: maze
+//Function:    maze
 //Description: keeps track of nodes visited
 
 void Menu::maze()
