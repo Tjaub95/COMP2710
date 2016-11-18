@@ -9,6 +9,7 @@
  *        Created:  11/14/2016 11:07:16 PM
  *       Revision:  none
  *       Compiler:  gcc
+ *    Compilation:  make hw2
  *
  *         Author:  Tyler Jewell
  *         E-Mail:  tjj0013@auburn.edu
@@ -16,7 +17,7 @@
  * =====================================================================================
  */
 
-//#define UNIT_TESTING
+#define UNIT_TESTING
 #include "HeartSurgeon.h"
 #include <iostream>
 #include <string>
@@ -88,6 +89,7 @@ int main()
       HeartSurgeon * surg;
       surg = surgeon;
       cout << surg->patientOutput();
+	  cout << endl;
       
    	// test deleting everything from surgeon
       surg->resetSurgery();
