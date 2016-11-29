@@ -86,9 +86,9 @@ public:
     	
     	for (int i = 0; i < list.size(); i++)
     	{
-    		//BankAccount* acct = acct_[i];
+    		BankAccount* acct = list[i];
     
-			//finalBalance += acct->getBalance();
+			finalBalance += acct->getBalance();
 		}	
 
 		cout << "Final Balance: $" << finalBalance;
