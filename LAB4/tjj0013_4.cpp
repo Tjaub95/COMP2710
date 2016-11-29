@@ -410,6 +410,14 @@ public:
 			list[i] -> printTransactions();
 		}	
 	}
+	
+	void computeBalance()
+	{
+		for (int i = 0; i < list.size(); i++)
+		{
+			list[i] -> computeBankBalance();
+		}
+	}
 
 private:
   	System(const System &);
@@ -480,7 +488,7 @@ int main()
 
 				case (7):
 				{
-					
+					ss.computeBalance();
 					break;
 				}
 
